@@ -1,0 +1,12 @@
+@import url(./__image/card__image.css);
+@import url(./__like/card__like.css);
+@import url(./__subscription/card__subscription.css);
+@import url(./__wrapper/card__wrapper.css);
+
+.card {
+  display: flex;
+  flex-direction: column;
+  background: #FFFFFF;
+  border-radius: 10px;
+  overflow: hidden;
+}

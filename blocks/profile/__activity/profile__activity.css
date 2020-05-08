@@ -1,0 +1,19 @@
+.profile__activity {
+  font-weight: normal;
+  font-style: normal;
+  font-size: 14px;
+  line-height: 17px;
+  color: #FFFFFF;
+  margin: 5px 0 0 0;
+  box-sizing: content-box;
+  text-align: center;
+  grid-area: activity;
+  justify-self: center;
+}
+
+@media all and (min-width: 700px) {
+  .profile__activity {
+    font-size: 18px;
+    line-height: 18px;
+  }
+}

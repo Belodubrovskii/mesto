@@ -1,0 +1,17 @@
+.profile__name {
+  margin: 0;
+  font-weight: 500;
+  font-size: 27px;
+  color: #FFFFFF;
+  grid-area: name;
+  text-align: center;
+}
+
+
+@media all and (min-width: 700px) {
+  .profile__name {
+    font-size: 42px;
+    text-align: left;
+  }
+}
+
