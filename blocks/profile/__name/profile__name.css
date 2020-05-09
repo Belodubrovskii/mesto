@@ -8,7 +8,7 @@
 }
 
 
-@media all and (min-width: 700px) {
+@media all and (min-width: 950px) {
   .profile__name {
     font-size: 42px;
     text-align: left;

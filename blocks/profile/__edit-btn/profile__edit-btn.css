@@ -3,11 +3,12 @@
   width: 18px;
   height: 18px;
   align-self: end;
-  margin-bottom: 6px;
+  margin-bottom: 5px;
   grid-area: edit;
   background-size: cover;
   background-color: #000000;
   border: 0;
+  transition: opacity 0.5s;
 }
 
 .profile__edit-btn:hover {
@@ -16,10 +17,10 @@
 }
 
 
-@media all and (min-width: 700px) {
+@media all and (min-width: 950px) {
   .profile__edit-btn {
     width: 24px;
     height: 24px;
-    margin-bottom: 12px;
+    margin-bottom: 8px;
   }
 }

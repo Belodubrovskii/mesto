@@ -9,6 +9,7 @@
   background-repeat: no-repeat;
   background-position: center;
   margin: 0 auto;
+  transition: opacity 0.5s;
 }
 
 .profile__add-btn:hover {
@@ -16,7 +17,7 @@
   cursor: pointer;
 }
 
-@media all and (min-width: 700px) {
+@media all and (min-width: 950px) {
   .profile__add-btn {
     max-width: 150px;
     margin: 0 0 0 auto;

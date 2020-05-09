@@ -14,7 +14,7 @@
   padding: 0 19px 0;
 }
 
-@media all and (min-width: 700px) {
+@media all and (min-width: 950px) {
   .profile {
     flex-direction: row;
     margin: 0 auto 50px;

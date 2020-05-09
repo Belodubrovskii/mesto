@@ -1,0 +1,18 @@
+.popup__form-name {
+  height: 27.26px;
+  border: 0;
+  box-sizing: border-box;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+  font-family: 'Inter';
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 1.2;
+  margin-bottom: 29.74px;
+}
+
+
+@media all and (max-width: 480px) {
+  .popup__form-name {
+    margin-bottom: 20px;
+  }
+}
