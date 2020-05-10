@@ -9,6 +9,10 @@
   text-align: center;
   grid-area: activity;
   justify-self: center;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+  max-width: 75vw;
 }
 
 @media all and (min-width: 950px) {
@@ -17,5 +21,6 @@
     line-height: 1;
     text-align: left;
     justify-self: start;
+    max-width: 500px;
   }
 }

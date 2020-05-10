@@ -7,17 +7,13 @@ const activity = document.querySelector('.profile__activity')
 const nameInput = document.querySelector('.popup__form-name');
 const activityInput = document.querySelector('.popup__form-activity');
 
+const formElement = document.querySelector('.popup__form-container');
+
 function openClosePopup() {
   popup.classList.toggle('popup_opened');
   nameInput.value = name.textContent;
   activityInput.value = activity.textContent;
 }
-
-editProfile.addEventListener('click', openClosePopup);
-closeButton.addEventListener('click', openClosePopup);
-
-
-const formElement = document.querySelector('.popup__form-container');
 
 function formSubmitHandler (evt) {
     evt.preventDefault();
@@ -29,6 +25,8 @@ function formSubmitHandler (evt) {
 }
 
 
+editProfile.addEventListener('click', openClosePopup);
+closeButton.addEventListener('click', openClosePopup);
 // Прикрепляем обработчик к форме:
 // он будет следить за событием “submit” - «отправка»
 formElement.addEventListener('submit', formSubmitHandler);
