@@ -11,4 +11,4 @@
 * Верстка форм;
 * Возможность редактирования и сохранения данных профиля.
 
-Проект можно посмотреть [здесь](https://belodubrovskii.github.io/mesto/)
+Проект можно посмотреть [здесь](https://belodubrovskii.github.io/russian-travel/)

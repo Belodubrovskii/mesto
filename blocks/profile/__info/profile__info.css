@@ -5,11 +5,14 @@
     "name edit"
     "activity activity";
   grid-column-gap: 6px;
-  margin: 16px auto 36px;
+  margin: 14px auto 36px;
 }
 
 @media all and (min-width: 950px) {
   .profile__info {
+    grid-template-areas:
+    "name edit"
+    "activity .";
     margin: 0 0 0 30px;
     grid-column-gap: 17px;
   }
