@@ -40,12 +40,6 @@ function openClosePopup() {
   activityInput.value = activity.textContent;
 }
 
-editProfile.addEventListener('click', openClosePopup);
-closeButton.addEventListener('click', openClosePopup);
-
-
-const formElement = document.querySelector('.popup__form-container');
-
 function formSubmitHandler (evt) {
     evt.preventDefault();
 
@@ -76,6 +70,8 @@ initialCards.forEach( function (item) {
 
 
 
+editProfile.addEventListener('click', openClosePopup);
+closeButton.addEventListener('click', openClosePopup);
 // Прикрепляем обработчик к форме:
 // он будет следить за событием “submit” - «отправка»
 formElement.addEventListener('submit', formSubmitHandler);
