@@ -7,9 +7,11 @@ const activity = document.querySelector('.profile__activity')
 const nameInput = document.querySelector('.popup__form-name');
 const activityInput = document.querySelector('.popup__form-activity');
 
+const formElement = document.querySelector('.popup__form-container');
+
 const initialCards = [
   {
-      name: 'Архызdsfffffffffffffffffffffffffffffffffffffffffffffff fsdkfkds',
+      name: 'Архыз',
       link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg'
   },
   {
