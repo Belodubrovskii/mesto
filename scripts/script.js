@@ -1,5 +1,5 @@
 const popup = document.querySelector('.popup');
-const editProfile = document.querySelector('.profile__edit-btn');
+const editProfileButton = document.querySelector('.profile__edit-btn');
 const closeButton = document.querySelector('.popup__close-button');
 
 const name = document.querySelector('.profile__name')
@@ -7,7 +7,17 @@ const activity = document.querySelector('.profile__activity')
 const nameInput = document.querySelector('.popup__form-name');
 const activityInput = document.querySelector('.popup__form-activity');
 
-const formElement = document.querySelector('.popup__form-container');
+const editFormElement = document.querySelector('.popup__form-container');
+const placeFormElement = document.querySelector('.popup__place-form-container');
+
+const addCardButton = document.querySelector('.profile__add-btn');
+const popupAddCard = document.querySelector('.popup_addCard');
+const content = document.querySelector('.content');
+const cardLikeButton = document.querySelector('.card__like');
+
+
+const imageTitleInput = document.querySelector('.popup__form-image-title');
+const imageLinkInput = document.querySelector('.popup__form-image-link');
 
 const initialCards = [
   {
@@ -36,20 +46,15 @@ const initialCards = [
   }
 ];
 
-function openClosePopup() {
-  popup.classList.toggle('popup_opened');
-  nameInput.value = name.textContent;
-  activityInput.value = activity.textContent;
-}
-
 function formSubmitHandler (evt) {
     evt.preventDefault();
 
     name.textContent = nameInput.value;
     activity.textContent = activityInput.value;
 
-    openClosePopup();
+    popup.classList.toggle('popup_opened')
 }
+
 
 // =============== Add initial cadrs ====================================
 
@@ -60,6 +65,9 @@ function addInitialCards (item) {
   const cardElement = cardTemplate.cloneNode(true);
   cardElement.querySelector('.card__image').src = item.link;
   cardElement.querySelector('.card__subscription').textContent = item.name;
+  // cardElement.querySelector('.card__like').addEventListener('click', function (evt) {
+  //   evt.target.classList.toggle('card__like_active');
+  // });
   cardContainer.prepend(cardElement);
 }
 
@@ -69,12 +77,65 @@ initialCards.forEach( function (item) {
 
 //======================================================================
 
+function createCardItem (evt) {
+  evt.preventDefault();
+  const cardElement = cardTemplate.cloneNode(true);
+  cardElement.querySelector('.card__image').src = imageLinkInput.value;
+  cardElement.querySelector('.card__subscription').textContent = imageTitleInput.value;
+
+  // cardElement.querySelector('.card__like').addEventListener('click', function (evt) {
+  //   evt.target.classList.toggle('card__like_active');
+  // });
+
+  cardContainer.prepend(cardElement);
 
 
+  popupAddCard.classList.toggle('popup_opened')
+}
 
-editProfile.addEventListener('click', openClosePopup);
-closeButton.addEventListener('click', openClosePopup);
+function likeActive (evt) {
+
+}
+
+
+// ====================== Events ===========================
+
+addCardButton.addEventListener('click', function() {
+  popupAddCard.classList.toggle('popup_opened');
+  imageTitleInput.value = '';
+  imageLinkInput.value = '';
+});
+
+editProfileButton.addEventListener('click', function() {
+  popup.classList.toggle('popup_opened');
+  nameInput.value = name.textContent;
+  activityInput.value = activity.textContent;
+});
+
+// close any popup
+content.addEventListener('click', function(evt) {
+  if (evt.target.className != 'popup__close-button')
+  return;
+
+  evt.target.closest('.popup').classList.toggle('popup_opened');
+  console.log('click');
+});
+
+content.addEventListener('click', function(evt) {
+  if (evt.target.className != 'card__like')
+  return;
+
+  evt.target.classList.toggle('card__like_active');
+});
+
+content.addEventListener('click', function(evt) {
+  if (evt.target.className != 'card__recycle-bin')
+  return;
+
+  evt.target.closest('.card').remove();
+});
+// cardLikeButton.addEventListener('click', );
 // Прикрепляем обработчик к форме:
 // он будет следить за событием “submit” - «отправка»
-formElement.addEventListener('submit', formSubmitHandler);
-
+editFormElement.addEventListener('submit', formSubmitHandler);
+placeFormElement.addEventListener('submit', createCardItem);

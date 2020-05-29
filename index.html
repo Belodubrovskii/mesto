@@ -24,55 +24,24 @@
     <section class="popup">
       <form class="popup__form-container">
         <h4 class="popup__title">Редактировать профиль</h4>
-        <input class="popup__form-name" type="text">
-        <input class="popup__form-activity" type="text">
+        <input class="popup__input popup__form-name" type="text">
+        <input class="popup__input popup__form-activity" type="text">
         <input class="popup__save-btn" type="submit" value="Сохранить">
         <button class="popup__close-button" type="button"></button>
       </form>
     </section>
+
+    <section class="popup popup_addCard">
+      <form class="popup__place-form-container">
+        <h4 class="popup__title">Новое место</h4>
+        <input class="popup__input popup__form-image-title" type="text" placeholder="Название">
+        <input class="popup__input popup__form-image-link" type="text" placeholder="Ссылка на картинку">
+        <input class="popup__save-btn" type="submit" value="Создать">
+        <button class="popup__close-button" type="button"></button>
+      </form>
+    </section>
+
     <section class="cards">
-      <!-- <div class="card">
-        <img class="card__image" alt="Монастрырь" src="./images/karachaevsk.jpg">
-        <div class="card__wrapper">
-          <h3 class="card__subscription">Карачаевск</h3>
-          <button class="card__like"></button>
-        </div>
-      </div>
-      <div class="card">
-        <img class="card__image" alt="Горы в тумане" src="./images/ergaki.jpg">
-        <div class="card__wrapper">
-          <h3 class="card__subscription">Ергаки</h3>
-          <button class="card__like"></button>
-        </div>
-      </div>
-      <div class="card">
-        <img class="card__image" alt="Дорога к горе Эльбрус" src="./images/elbrus.jpg">
-        <div class="card__wrapper">
-          <h3 class="card__subscription">Эльбрус</h3>
-          <button class="card__like"></button>
-        </div>
-      </div>
-      <div class="card">
-        <img class="card__image" alt="Вулканическое озеро" src="./images/kamchatka.jpg">
-        <div class="card__wrapper">
-          <h3 class="card__subscription">Камчатка</h3>
-          <button class="card__like"></button>
-        </div>
-      </div>
-      <div class="card">
-        <img class="card__image" alt="Байкал" src="./images/baikal.jpg">
-        <div class="card__wrapper">
-          <h3 class="card__subscription">Озеро Байкал</h3>
-          <button class="card__like"></button>
-        </div>
-      </div>
-      <div class="card">
-        <img class="card__image" alt="Закат на озере Байкал" src="./images/irkutsk.jpg">
-        <div class="card__wrapper">
-          <h3 class="card__subscription">Иркутск</h3>
-          <button class="card__like"></button>
-        </div>
-      </div> -->
     </section>
   </main>
 
@@ -81,7 +50,8 @@
       <img class="card__image" alt="" src="">
       <div class="card__wrapper">
         <h3 class="card__subscription"></h3>
-        <div class="card__like"></div>
+        <button class="card__like"></button>
+        <button class="card__recycle-bin"></button>
       </div>
   </template>
 

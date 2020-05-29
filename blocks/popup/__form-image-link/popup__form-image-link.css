@@ -1,9 +1,9 @@
-.popup__form-activity {
+.popup__form-image-link {
   margin-bottom: 48px;
 }
 
 @media all and (max-width: 480px) {
-  .popup__form-activity {
+  .popup__form-image-link {
     margin-bottom: 20px;
   }
 }
