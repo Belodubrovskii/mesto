@@ -1,4 +1,4 @@
-@import url(./_opened/popup_opened.css);
+@import url(./_photo/popup_photo.css);
 @import url(./__title/popup__title.css);
 @import url(./__save-btn/popup__save-btn.css);
 @import url(./__form-name/popup__form-name.css);
@@ -9,6 +9,10 @@
 @import url(./__form-image-title/popup__form-image-title.css);
 @import url(./__form-image-link/popup__form-image-link.css);
 @import url(./__place-form-container/popup__place-form-container.css);
+@import url(./__image/popup__image.css);
+@import url(./__image-subscription/popup__image-subscription.css);
+@import url(./__container/popup__container.css);
+@import url(./_add-card/popup_add-card.css);
 
 
 .popup {
@@ -18,7 +22,11 @@
   height: 100vh;
   z-index: 3;
   top: 0;
-  display: none;
+  display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
+  visibility: hidden;
+  opacity: 0;
+  transition: visibility 0.5s, opacity 0.5s linear;
 }

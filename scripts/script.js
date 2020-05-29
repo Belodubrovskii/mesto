@@ -11,13 +11,17 @@ const editFormElement = document.querySelector('.popup__form-container');
 const placeFormElement = document.querySelector('.popup__place-form-container');
 
 const addCardButton = document.querySelector('.profile__add-btn');
-const popupAddCard = document.querySelector('.popup_addCard');
+const popupAddCard = document.querySelector('.popup_add-card');
 const content = document.querySelector('.content');
-const cardLikeButton = document.querySelector('.card__like');
-
+const popupPhoto = document.querySelector('.popup_photo');
+const image = document.querySelector('.popup__image');
+const imageSubscription = document.querySelector('.popup__image-subscription');
 
 const imageTitleInput = document.querySelector('.popup__form-image-title');
 const imageLinkInput = document.querySelector('.popup__form-image-link');
+
+const cardTemplate = document.querySelector('#card-template').content;
+const cardContainer = document.querySelector('.cards');
 
 const initialCards = [
   {
@@ -56,56 +60,41 @@ function formSubmitHandler (evt) {
 }
 
 
-// =============== Add initial cadrs ====================================
-
-const cardTemplate = document.querySelector('#card-template').content;
-const cardContainer = document.querySelector('.cards');
-
-function addInitialCards (item) {
+function getCardElement (link, name) {
   const cardElement = cardTemplate.cloneNode(true);
-  cardElement.querySelector('.card__image').src = item.link;
-  cardElement.querySelector('.card__subscription').textContent = item.name;
-  // cardElement.querySelector('.card__like').addEventListener('click', function (evt) {
-  //   evt.target.classList.toggle('card__like_active');
-  // });
-  cardContainer.prepend(cardElement);
+  cardElement.querySelector('.card__image').src = link;
+  cardElement.querySelector('.card__image').alt = 'Фотография места ' + name;
+  cardElement.querySelector('.card__subscription').textContent = name;
+
+  return cardElement;
 }
 
+// =============== Add initial cadrs ====================================
+
 initialCards.forEach( function (item) {
-  addInitialCards (item)
+  cardContainer.prepend(getCardElement (item.link, item.name));
 });
 
-//======================================================================
+//=======================================================================
 
 function createCardItem (evt) {
   evt.preventDefault();
-  const cardElement = cardTemplate.cloneNode(true);
-  cardElement.querySelector('.card__image').src = imageLinkInput.value;
-  cardElement.querySelector('.card__subscription').textContent = imageTitleInput.value;
 
-  // cardElement.querySelector('.card__like').addEventListener('click', function (evt) {
-  //   evt.target.classList.toggle('card__like_active');
-  // });
-
-  cardContainer.prepend(cardElement);
-
-
+  cardContainer.prepend(getCardElement(imageLinkInput.value, imageTitleInput.value));
   popupAddCard.classList.toggle('popup_opened')
-}
-
-function likeActive (evt) {
-
 }
 
 
 // ====================== Events ===========================
 
+// open add-card popup
 addCardButton.addEventListener('click', function() {
   popupAddCard.classList.toggle('popup_opened');
   imageTitleInput.value = '';
   imageLinkInput.value = '';
 });
 
+// open edit profile popup
 editProfileButton.addEventListener('click', function() {
   popup.classList.toggle('popup_opened');
   nameInput.value = name.textContent;
@@ -121,20 +110,33 @@ content.addEventListener('click', function(evt) {
   console.log('click');
 });
 
+// like
 content.addEventListener('click', function(evt) {
-  if (evt.target.className != 'card__like')
-  return;
+  if (evt.target.classList.contains('card__like')) {
+    evt.target.classList.toggle('card__like_active');
+  }
 
-  evt.target.classList.toggle('card__like_active');
+  return;
 });
 
+// detele card (recycle-bin)
 content.addEventListener('click', function(evt) {
   if (evt.target.className != 'card__recycle-bin')
   return;
 
   evt.target.closest('.card').remove();
 });
-// cardLikeButton.addEventListener('click', );
+
+// open image popup
+content.addEventListener('click', function(evt) {
+  if (evt.target.className != 'card__image')
+  return;
+
+  popupPhoto.classList.toggle('popup_opened');
+  image.src = evt.target.src;
+  imageSubscription.textContent = evt.target.nextElementSibling.textContent;
+});
+
 // Прикрепляем обработчик к форме:
 // он будет следить за событием “submit” - «отправка»
 editFormElement.addEventListener('submit', formSubmitHandler);

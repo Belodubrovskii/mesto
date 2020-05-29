@@ -14,3 +14,9 @@
   cursor: pointer;
   opacity: 0.8;
 }
+
+@media all and (max-width: 480px) {
+  .popup__save-btn {
+    height: 40px;
+  }
+}
