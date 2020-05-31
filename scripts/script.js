@@ -1,9 +1,8 @@
 const popup = document.querySelector('.popup');
 const editProfileButton = document.querySelector('.profile__edit-btn');
-const closeButton = document.querySelector('.popup__close-button');
 
-const name = document.querySelector('.profile__name')
-const activity = document.querySelector('.profile__activity')
+const name = document.querySelector('.profile__name');
+const activity = document.querySelector('.profile__activity');
 const nameInput = document.querySelector('.popup__form-name');
 const activityInput = document.querySelector('.popup__form-activity');
 
@@ -50,15 +49,33 @@ const initialCards = [
   }
 ];
 
+function togglePopup (elem) {
+  elem.classList.toggle('popup_opened');
+};
+
 function formSubmitHandler (evt) {
-    evt.preventDefault();
+  evt.preventDefault();
 
-    name.textContent = nameInput.value;
-    activity.textContent = activityInput.value;
+  name.textContent = nameInput.value;
+  activity.textContent = activityInput.value;
 
-    popup.classList.toggle('popup_opened')
-}
+  togglePopup(popup);
+};
 
+function openEditPopup (elem) {
+
+  return function () {
+    togglePopup (elem);
+    nameInput.value = name.textContent;
+    activityInput.value = activity.textContent;
+}};
+
+function openAddCardPopup (elem) {
+  return function () {
+    togglePopup(elem);
+    imageTitleInput.value = '';
+    imageLinkInput.value = '';
+}};
 
 function getCardElement (link, name) {
   const cardElement = cardTemplate.cloneNode(true);
@@ -66,8 +83,24 @@ function getCardElement (link, name) {
   cardElement.querySelector('.card__image').alt = 'Фотография места ' + name;
   cardElement.querySelector('.card__subscription').textContent = name;
 
+  // open card image
+  cardElement.querySelector('.card__image').addEventListener('click', function (evt) {
+    togglePopup(popupPhoto);
+    image.src = evt.target.src;
+    imageSubscription.textContent = evt.target.nextElementSibling.textContent;
+  });
+
+  // delete card element
+  cardElement.querySelector('.card__recycle-bin').addEventListener('click', function (evt) {
+    evt.target.closest('.card').remove();
+  });
+
+  //like
+  cardElement.querySelector('.card__like').addEventListener('click', function(evt) {
+    evt.target.classList.toggle('card__like_active');
+  });
   return cardElement;
-}
+};
 
 // =============== Add initial cadrs ====================================
 
@@ -81,25 +114,17 @@ function createCardItem (evt) {
   evt.preventDefault();
 
   cardContainer.prepend(getCardElement(imageLinkInput.value, imageTitleInput.value));
-  popupAddCard.classList.toggle('popup_opened')
-}
+  togglePopup(popupAddCard);
+};
 
 
 // ====================== Events ===========================
 
 // open add-card popup
-addCardButton.addEventListener('click', function() {
-  popupAddCard.classList.toggle('popup_opened');
-  imageTitleInput.value = '';
-  imageLinkInput.value = '';
-});
+addCardButton.addEventListener('click', openAddCardPopup (popupAddCard));
 
 // open edit profile popup
-editProfileButton.addEventListener('click', function() {
-  popup.classList.toggle('popup_opened');
-  nameInput.value = name.textContent;
-  activityInput.value = activity.textContent;
-});
+editProfileButton.addEventListener('click', openEditPopup (popup));
 
 // close any popup
 content.addEventListener('click', function(evt) {
@@ -107,34 +132,6 @@ content.addEventListener('click', function(evt) {
   return;
 
   evt.target.closest('.popup').classList.toggle('popup_opened');
-  console.log('click');
-});
-
-// like
-content.addEventListener('click', function(evt) {
-  if (evt.target.classList.contains('card__like')) {
-    evt.target.classList.toggle('card__like_active');
-  }
-
-  return;
-});
-
-// detele card (recycle-bin)
-content.addEventListener('click', function(evt) {
-  if (evt.target.className != 'card__recycle-bin')
-  return;
-
-  evt.target.closest('.card').remove();
-});
-
-// open image popup
-content.addEventListener('click', function(evt) {
-  if (evt.target.className != 'card__image')
-  return;
-
-  popupPhoto.classList.toggle('popup_opened');
-  image.src = evt.target.src;
-  imageSubscription.textContent = evt.target.nextElementSibling.textContent;
 });
 
 // Прикрепляем обработчик к форме:
