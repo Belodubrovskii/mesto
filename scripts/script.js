@@ -131,7 +131,7 @@ content.addEventListener('click', function(evt) {
   if (evt.target.className != 'popup__close-button')
   return;
 
-  evt.target.closest('.popup').classList.toggle('popup_opened');
+  togglePopup (evt.target.closest('.popup'));
 });
 
 // Прикрепляем обработчик к форме:
