@@ -1,9 +1,3 @@
 .popup__form-activity {
-  margin-bottom: 48px;
-}
-
-@media all and (max-width: 480px) {
-  .popup__form-activity {
-    margin-bottom: 36px;
-  }
+  margin-bottom: 3px;
 }

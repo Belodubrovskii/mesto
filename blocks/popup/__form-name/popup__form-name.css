@@ -1,10 +1,5 @@
 .popup__form-name {
-  margin-bottom: 29.74px;
+  margin-bottom: 3px;
 }
 
 
-@media all and (max-width: 480px) {
-  .popup__form-name {
-    margin-bottom: 20px;
-  }
-}

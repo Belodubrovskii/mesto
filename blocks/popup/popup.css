@@ -1,18 +1,22 @@
 @import url(./_photo/popup_photo.css);
 @import url(./__title/popup__title.css);
-@import url(./__save-btn/popup__save-btn.css);
+@import url(./__button/popup__button.css);
+@import url(./__button/_disabled/popup__button_disabled.css);
 @import url(./__form-name/popup__form-name.css);
 @import url(./__form-activity/popup__form-activity.css);
-@import url(./__form-container/popup__form-container.css);
 @import url(./__close-button/popup__close-button.css);
 @import url(./__input/popup__input.css);
+@import url(./__input/_type/popup__input_type_error.css);
 @import url(./__form-image-title/popup__form-image-title.css);
 @import url(./__form-image-link/popup__form-image-link.css);
-@import url(./__place-form-container/popup__place-form-container.css);
 @import url(./__image/popup__image.css);
 @import url(./__image-subscription/popup__image-subscription.css);
 @import url(./__container/popup__container.css);
 @import url(./_add-card/popup_add-card.css);
+@import url(./__form/popup__form.css);
+@import url(./__error/popup__error.css);
+@import url(./__error/_visible/popup__error_visible.css);
+@import url(./__form-field/popup__form-field.css);
 
 
 .popup {

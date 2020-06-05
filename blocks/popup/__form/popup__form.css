@@ -1,4 +1,4 @@
-.popup__form-container {
+.popup__form {
   display: flex;
   position: relative;
   flex-direction: column;
@@ -13,7 +13,7 @@
 
 
 @media all and (max-width: 480px) {
-  .popup__form-container {
+  .popup__form {
     padding: 30px 20px 30px;
     width: 240px;
   }
