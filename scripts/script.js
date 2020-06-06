@@ -37,6 +37,8 @@ const formValidationOptions = {
 
 const inputListEdit = Array.from(editFormElement.querySelectorAll(formValidationOptions.inputSelector));
 const inputListAddCard = Array.from(addCardFormElement.querySelectorAll(formValidationOptions.inputSelector));
+const SubmitEditButton = popup.querySelector(formValidationOptions.submitButtonSelector);
+const SubmitAddCardButton = popupAddCard.querySelector(formValidationOptions.submitButtonSelector);
 
 const initialCards = [
   {
@@ -69,16 +71,6 @@ function togglePopup (elem) {
   elem.classList.toggle('popup_opened');
 };
 
-// function clearErrors (popup) {
-//   const textErrors = popup.querySelectorAll('.popup__error');
-//   textErrors.forEach( (textElement) => {
-//     textElement.classList.remove('popup__error_visible');
-//     textElement.textContent = '';
-//   });
-//   const inputErrors = popup.querySelectorAll('.popup__input');
-//   inputErrors.forEach( (inputElement) => inputElement.classList.remove('popup__input_type_error'));
-// }
-
 function formSubmitHandler (evt) {
 
   name.textContent = nameInput.value;
@@ -87,18 +79,6 @@ function formSubmitHandler (evt) {
   togglePopup(popup);
 };
 
-function activatePopupButton () {
-  const popupButton = popup.querySelector('.popup__button');
-  popupButton.classList.remove('popup__button_disabled');
-  popupButton.removeAttribute('disabled');
-}
-
-function deactivatePopupButton () {
-  const popupButton = popupAddCard.querySelector('.popup__button');
-  popupButton.classList.add('popup__button_disabled');
-  popupButton.setAttribute('disabled', true);
-}
-
 function openEditPopup () {
     togglePopup (popup);
     nameInput.value = name.textContent;
@@ -106,7 +86,7 @@ function openEditPopup () {
     inputListEdit.forEach( (inputElement) =>
       hideInputError(editFormElement, inputElement, formValidationOptions)
     );
-    activatePopupButton ();
+    toggleButtonState(inputListEdit, SubmitEditButton, formValidationOptions.inactiveButtonClass);
 };
 
 function openAddCardPopup () {
@@ -115,7 +95,7 @@ function openAddCardPopup () {
     inputListAddCard.forEach( (inputElement) =>
       hideInputError(addCardFormElement, inputElement, formValidationOptions)
     );
-    deactivatePopupButton ();
+    toggleButtonState(inputListAddCard, SubmitAddCardButton, formValidationOptions.inactiveButtonClass);
 };
 
 function likeImage (evt) {
