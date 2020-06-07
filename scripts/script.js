@@ -40,44 +40,17 @@ const inputListAddCard = Array.from(addCardFormElement.querySelectorAll(formVali
 const SubmitEditButton = popup.querySelector(formValidationOptions.submitButtonSelector);
 const SubmitAddCardButton = popupAddCard.querySelector(formValidationOptions.submitButtonSelector);
 
-const initialCards = [
-  {
-      name: 'Архыз',
-      link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg'
-  },
-  {
-      name: 'Челябинская область',
-      link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/chelyabinsk-oblast.jpg'
-  },
-  {
-      name: 'Иваново',
-      link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/ivanovo.jpg'
-  },
-  {
-      name: 'Камчатка',
-      link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kamchatka.jpg'
-  },
-  {
-      name: 'Холмогорский район',
-      link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kholmogorsky-rayon.jpg'
-  },
-  {
-      name: 'Байкал',
-      link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg'
-  }
-];
-
 function togglePopup (elem) {
   elem.classList.toggle('popup_opened');
-};
+}
 
-function formSubmitHandler (evt) {
+function editProfileSubmitHandler () {
 
   name.textContent = nameInput.value;
   activity.textContent = activityInput.value;
 
   togglePopup(popup);
-};
+}
 
 function openEditPopup () {
     togglePopup (popup);
@@ -87,7 +60,7 @@ function openEditPopup () {
       hideInputError(editFormElement, inputElement, formValidationOptions)
     );
     toggleButtonState(inputListEdit, SubmitEditButton, formValidationOptions.inactiveButtonClass);
-};
+}
 
 function openAddCardPopup () {
     togglePopup(popupAddCard);
@@ -96,17 +69,17 @@ function openAddCardPopup () {
       hideInputError(addCardFormElement, inputElement, formValidationOptions)
     );
     toggleButtonState(inputListAddCard, SubmitAddCardButton, formValidationOptions.inactiveButtonClass);
-};
+}
 
 function likeImage (evt) {
   evt.target.classList.toggle('card__like_active');
-};
+}
 
 function openPhotoPopup (evt) {
   togglePopup(popupPhoto);
   image.src = evt.target.src;
   imageSubscription.textContent = evt.target.nextElementSibling.textContent;
-};
+}
 
 function removeCardElement (evt) {
   evt.target.closest('.card').remove();
@@ -114,12 +87,13 @@ function removeCardElement (evt) {
 
 function getCardElement (link, name) {
   const cardElement = cardTemplate.cloneNode(true);
-  cardElement.querySelector('.card__image').src = link;
-  cardElement.querySelector('.card__image').alt = 'Фотография места ' + name;
+  const cardImage = cardElement.querySelector('.card__image');
+  cardImage.src = link;
+  cardImage.alt = 'Фотография места ' + name;
   cardElement.querySelector('.card__subscription').textContent = name;
 
   // open card image
-  cardElement.querySelector('.card__image').addEventListener('click', openPhotoPopup);
+  cardImage.addEventListener('click', openPhotoPopup);
 
   // delete card element
   cardElement.querySelector('.card__recycle-bin').addEventListener('click', removeCardElement);
@@ -127,7 +101,7 @@ function getCardElement (link, name) {
   //like
   cardElement.querySelector('.card__like').addEventListener('click', likeImage);
   return cardElement;
-};
+}
 
 // =============== Add initial cadrs ====================================
 
@@ -137,11 +111,11 @@ initialCards.forEach( function (item) {
 
 //=======================================================================
 
-function createCardItem (evt) {
+function createCardItem () {
 
   cardContainer.prepend(getCardElement(imageLinkInput.value, imageTitleInput.value));
   togglePopup(popupAddCard);
-};
+}
 
 
 // ====================== Events ===========================
@@ -182,7 +156,7 @@ document.addEventListener('click', closePopupByOverlayClick);
 
 // Прикрепляем обработчик к форме:
 // он будет следить за событием “submit” - «отправка»
-editFormElement.addEventListener('submit', formSubmitHandler);
+editFormElement.addEventListener('submit', editProfileSubmitHandler);
 addCardFormElement.addEventListener('submit', createCardItem);
 
 
