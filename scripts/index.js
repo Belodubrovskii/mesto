@@ -38,6 +38,10 @@ const formValidationOptions = {
   errorClass: 'popup__error_visible'
 };
 
+const formEditValidate = new FormValidator (formValidationOptions, editFormElement);
+const formAddCardValidate = new FormValidator (formValidationOptions, addCardFormElement);
+
+
 function togglePopup (elem) {
   elem.classList.toggle('popup_opened');
 }
@@ -55,16 +59,14 @@ function openEditPopup () {
     nameInput.value = name.textContent;
     activityInput.value = activity.textContent;
 
-    const form = new FormValidator (formValidationOptions, editFormElement);
-    form.clearErrors();
+    formEditValidate.clearErrors();
 }
 
 function openAddCardPopup () {
     togglePopup(popupAddCard);
     addCardFormElement.reset();
 
-    const form = new FormValidator (formValidationOptions, addCardFormElement);
-    form.clearErrors();
+    formAddCardValidate.clearErrors();
 }
 
 function openImagePopup () {
@@ -136,12 +138,14 @@ editFormElement.addEventListener('submit', editProfileSubmitHandler);
 addCardFormElement.addEventListener('submit', createCardItem);
 
 
-const formList = Array.from(document.querySelectorAll(formValidationOptions.formSelector));
+// const formList = Array.from(document.querySelectorAll(formValidationOptions.formSelector));
 
 
 // form list enable validation
-formList.forEach( (formElement) => {
-  const formToValidate = new FormValidator (formValidationOptions, formElement);
-  formToValidate.enableValidation();
+formEditValidate.enableValidation();
+formAddCardValidate.enableValidation();
+// formList.forEach( (formElement) => {
+//   const formToValidate = new FormValidator (formValidationOptions, formElement);
+//   formToValidate.enableValidation();
 
-})
+// })
