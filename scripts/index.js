@@ -138,14 +138,6 @@ editFormElement.addEventListener('submit', editProfileSubmitHandler);
 addCardFormElement.addEventListener('submit', createCardItem);
 
 
-// const formList = Array.from(document.querySelectorAll(formValidationOptions.formSelector));
-
-
 // form list enable validation
 formEditValidate.enableValidation();
 formAddCardValidate.enableValidation();
-// formList.forEach( (formElement) => {
-//   const formToValidate = new FormValidator (formValidationOptions, formElement);
-//   formToValidate.enableValidation();
-
-// })
