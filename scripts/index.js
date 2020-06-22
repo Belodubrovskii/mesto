@@ -56,6 +56,7 @@ function editProfileSubmitHandler () {
 
 function openEditPopup () {
     togglePopup (popup);
+    document.addEventListener('keydown', closePopupByEsc);
     nameInput.value = name.textContent;
     activityInput.value = activity.textContent;
 
@@ -64,14 +65,18 @@ function openEditPopup () {
 
 function openAddCardPopup () {
     togglePopup(popupAddCard);
-    addCardFormElement.reset();
+    document.addEventListener('keydown', closePopupByEsc);
 
+    addCardFormElement.reset();
     formAddCardValidate.clearErrors();
 }
 
 function openImagePopup () {
   togglePopup(popupPhoto);
+  document.addEventListener('keydown', closePopupByEsc);
+
   image.src = this._element.querySelector('.card__image').src;
+  image.alt = `Фотография места ${this._name}`
   imageSubscription.textContent = this._element.querySelector('.card__subscription').textContent;
 }
 
@@ -79,7 +84,7 @@ function openImagePopup () {
 
 initialCards.forEach((item) => {
 
-  const card = new Card (item.link, item.name, '.card-template', openImagePopup);
+  const card = new Card (item, '.card-template', openImagePopup);
   const cardElement = card.generateCard();
   cardContainer.prepend(cardElement);
 });
@@ -88,8 +93,11 @@ initialCards.forEach((item) => {
 //=======================================================================
 
 function createCardItem () {
-
-  const card = new Card (imageLinkInput.value, imageTitleInput.value, '.card-template', openImagePopup);
+  const cardProp = {
+    name: imageTitleInput.value,
+    link: imageLinkInput.value
+  }
+  const card = new Card (cardProp, '.card-template', openImagePopup);
   const cardElement = card.generateCard();
   cardContainer.prepend(cardElement);
   togglePopup(popupAddCard);
@@ -106,9 +114,18 @@ editProfileButton.addEventListener('click', openEditPopup);
 
 // close any popup
 
-popupProfileCloseBtn.addEventListener('click', () => togglePopup (popup));
-popupAddCardCloseBtn.addEventListener('click', () => togglePopup (popupAddCard));
-popupPhotoCloseBtn.addEventListener('click', () => togglePopup (popupPhoto));
+popupProfileCloseBtn.addEventListener('click', () => {
+  togglePopup (popup);
+  document.removeEventListener('keydown', closePopupByEsc);
+})
+popupAddCardCloseBtn.addEventListener('click', () => {
+  togglePopup (popupAddCard);
+  document.removeEventListener('keydown', closePopupByEsc);
+})
+popupPhotoCloseBtn.addEventListener('click', () => {
+  togglePopup (popupPhoto);
+  document.removeEventListener('keydown', closePopupByEsc);
+})
 
 // close by Esc
 function closePopupByEsc (evt) {
@@ -120,13 +137,14 @@ function closePopupByEsc (evt) {
   }
 }
 
-document.addEventListener('keydown', closePopupByEsc);
+// document.addEventListener('keydown', closePopupByEsc);
+// document.removeEventListener('keydown', closePopupByEsc);
 
 
 // close popup by overlay click
 function closePopupByOverlayClick (evt) {
   if (evt.target.classList.contains('popup_opened')) {
-    document.querySelector('.popup_opened').classList.remove('popup_opened');
+    evt.target.classList.remove('popup_opened');
   }
 }
 

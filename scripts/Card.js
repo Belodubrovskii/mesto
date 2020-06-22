@@ -1,7 +1,7 @@
 export class Card {
-  constructor (link, name, templateSelector, handleCardClick) {
-    this._link = link;
-    this._name = name;
+  constructor (cardProp, templateSelector, handleCardClick) {
+    this._link = cardProp.link;
+    this._name = cardProp.name;
     this._templateSelector = templateSelector;
     this._openImagePopap = handleCardClick;
   }
@@ -16,8 +16,8 @@ export class Card {
   }
 
   //like
-  _likeImage () {
-    this._element.querySelector('.card__like').classList.toggle('card__like_active');
+  _likeImage (cardLikeElement) {
+    cardLikeElement.classList.toggle('card__like_active');
   }
 
   //delete card
@@ -25,9 +25,10 @@ export class Card {
     this._element.remove();
   }
 
-  _setEventListeners () {
-    this._element.querySelector('.card__like').addEventListener('click', () => {
-      this._likeImage();
+  _setEventListeners (cardLikeElement, cardImage) {
+
+    cardLikeElement.addEventListener('click', () => {
+      this._likeImage(cardLikeElement)
     })
 
     this._element.querySelector('.card__recycle-bin').addEventListener('click', () => {
@@ -35,18 +36,21 @@ export class Card {
     })
 
     //open image popup
-    this._element.querySelector('.card__image').addEventListener('click', () => {
+    cardImage.addEventListener('click', () => {
       this._openImagePopap();
     })
   }
 
   generateCard () {
     this._element = this._getCardElement();
-    this._setEventListeners();
-    const cardImage = this._element.querySelector('.card__image'); //!!!!!!!!!!!!!!!!!!
+
+    const cardLikeElement = this._element.querySelector('.card__like')
+    const cardImage = this._element.querySelector('.card__image');
     cardImage.src = this._link;
     cardImage.alt = 'Фотография места ' + this._name;
     this._element.querySelector('.card__subscription').textContent = this._name;
+
+    this._setEventListeners(cardLikeElement, cardImage);
 
     return this._element
   }
