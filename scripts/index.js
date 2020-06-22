@@ -137,10 +137,6 @@ function closePopupByEsc (evt) {
   }
 }
 
-// document.addEventListener('keydown', closePopupByEsc);
-// document.removeEventListener('keydown', closePopupByEsc);
-
-
 // close popup by overlay click
 function closePopupByOverlayClick (evt) {
   if (evt.target.classList.contains('popup_opened')) {
