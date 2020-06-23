@@ -3,7 +3,7 @@ export class Card {
     this._link = cardProp.link;
     this._name = cardProp.name;
     this._templateSelector = templateSelector;
-    this._openImagePopap = handleCardClick;
+    this._openImagePopap = handleCardClick.bind(this);
   }
 
   _getCardElement () {
@@ -16,42 +16,46 @@ export class Card {
   }
 
   //like
-  _likeImage (cardLikeElement) {
-    cardLikeElement.classList.toggle('card__like_active');
+  _likeImage (evt) {
+    evt.target.classList.toggle('card__like_active');
   }
 
-  //delete card
-  _removeCardElement () {
-    this._element.remove();
+  //delete card and events
+  _removeCardAndEvents (evt) {
+    this._removeEventListeners();
+    evt.target.closest('.card').remove();
   }
 
-  _setEventListeners (cardLikeElement, cardImage) {
+  _setEventListeners () {
 
-    cardLikeElement.addEventListener('click', () => {
-      this._likeImage(cardLikeElement)
-    })
-
-    this._element.querySelector('.card__recycle-bin').addEventListener('click', () => {
-      this._removeCardElement();
-    })
+    this._like.addEventListener('click', this._likeImage);
+    this._recycleBin.addEventListener('click', this._deleteCard);
 
     //open image popup
-    cardImage.addEventListener('click', () => {
-      this._openImagePopap();
-    })
+    this._image.addEventListener('click', this._openImagePopap);
+  }
+
+  _removeEventListeners () {
+
+    this._like.removeEventListener('click', this._likeImage);
+    this._recycleBin.removeEventListener('click', this._deleteCard);
+    this._image.removeEventListener('click', this._openImagePopap);
   }
 
   generateCard () {
     this._element = this._getCardElement();
 
-    const cardLikeElement = this._element.querySelector('.card__like')
-    const cardImage = this._element.querySelector('.card__image');
-    cardImage.src = this._link;
-    cardImage.alt = 'Фотография места ' + this._name;
+    this._like = this._element.querySelector('.card__like');
+    this._recycleBin = this._element.querySelector('.card__recycle-bin');
+    this._image = this._element.querySelector('.card__image');
+
+    this._image.src = this._link;
+    this._image.alt = 'Фотография места ' + this._name;
     this._element.querySelector('.card__subscription').textContent = this._name;
 
-    this._setEventListeners(cardLikeElement, cardImage);
-
+    // bind need to use "this" in _removeEventListeners()
+    this._deleteCard = this._removeCardAndEvents.bind(this);
+    this._setEventListeners();
     return this._element
   }
 
