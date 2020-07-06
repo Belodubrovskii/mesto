@@ -1,9 +1,9 @@
 export class Card {
-  constructor (cardProp, templateSelector, handleCardClick) {
+  constructor (cardProp, templateSelector, {handleCardClick}) {
     this._link = cardProp.link;
     this._name = cardProp.name;
     this._templateSelector = templateSelector;
-    this._openImagePopap = handleCardClick.bind(this);
+    this._handleCardClick = handleCardClick;
   }
 
   _getCardElement () {
@@ -32,14 +32,14 @@ export class Card {
     this._recycleBin.addEventListener('click', this._deleteCard);
 
     //open image popup
-    this._image.addEventListener('click', this._openImagePopap);
+    this._image.addEventListener('click', this._handleCardClick);
   }
 
   _removeEventListeners () {
 
     this._like.removeEventListener('click', this._likeImage);
     this._recycleBin.removeEventListener('click', this._deleteCard);
-    this._image.removeEventListener('click', this._openImagePopap);
+    this._image.removeEventListener('click', this._handleCardClick);
   }
 
   generateCard () {
