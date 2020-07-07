@@ -1,31 +1,22 @@
-import {Card} from './Card.js';
-import {FormValidator} from './FormValidator.js';
-import {initialCards} from './initialCards.js';
-import {Section} from './Section.js';
-import PopupWithForm from './PopupWithForm.js';
-import PopupWithImage from './PopupWithImage.js';
-import UserInfo from './UserInfo.js';
+import './index.css';
 
-const popup = document.querySelector('.popup');
-const editProfileButton = document.querySelector('.profile__edit-btn');
+import {Card} from '../components/Card.js';
+import {FormValidator} from '../components/FormValidator.js';
+import {Section} from '../components/Section.js';
+import PopupWithForm from '../components/PopupWithForm.js';
+import PopupWithImage from '../components/PopupWithImage.js';
+import UserInfo from '../components/UserInfo.js';
 
-const nameInput = document.querySelector('.popup__form-name');
-const activityInput = document.querySelector('.popup__form-activity');
-
-const addCardButton = document.querySelector('.profile__add-btn');
-const popupAddCard = document.querySelector('.popup_add-card');
-
-const editFormElement = popup.querySelector('.popup__form');
-const addCardFormElement = popupAddCard.querySelector('.popup__form');
-
-const formValidationOptions = {
-  formSelector: '.popup__form',
-  inputSelector: '.popup__input',
-  submitButtonSelector: '.popup__button',
-  inactiveButtonClass: 'popup__button_disabled',
-  inputErrorClass: 'popup__input_type_error',
-  errorClass: 'popup__error_visible'
-};
+import {
+  initialCards,
+  editProfileButton,
+  nameInput,
+  activityInput,
+  addCardButton,
+  editFormElement,
+  addCardFormElement,
+  formValidationOptions
+} from '../utils/constants.js';
 
 const formEditValidate = new FormValidator (formValidationOptions, editFormElement);
 const formAddCardValidate = new FormValidator (formValidationOptions, addCardFormElement);
