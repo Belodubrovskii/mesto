@@ -9,14 +9,20 @@ import UserInfo from '../components/UserInfo.js';
 
 import {
   initialCards,
-  editProfileButton,
-  nameInput,
-  activityInput,
-  addCardButton,
-  editFormElement,
-  addCardFormElement,
   formValidationOptions
 } from '../utils/constants.js';
+
+const popup = document.querySelector('.popup_profile');
+const popupAddCard = document.querySelector('.popup_add-card');
+
+const nameInput = document.querySelector('.popup__form-name');
+const activityInput = document.querySelector('.popup__form-activity');
+
+const addCardButton = document.querySelector('.profile__add-btn');
+const editProfileButton = document.querySelector('.profile__edit-btn');
+
+const editFormElement = popup.querySelector('.popup__form');
+const addCardFormElement = popupAddCard.querySelector('.popup__form');
 
 const formEditValidate = new FormValidator (formValidationOptions, editFormElement);
 const formAddCardValidate = new FormValidator (formValidationOptions, addCardFormElement);
@@ -34,17 +40,22 @@ const editPopup = new PopupWithForm('.popup_profile', {formSubmit: (inputValues)
 
 editPopup.setEventListeners();
 
+function createCardItem (item) {
+  const card = new Card (item, '.card-template', {handleCardClick: () => {
+    imagePopup.open(item.name, item.link);
+  }});
+  const cardElement = card.generateCard();
+
+  initialCardList.addItem(cardElement);
+
+}
+
 // =============== Add initial cadrs ====================================
 
 const initialCardList = new Section ({
   items: initialCards,
   renderer: (item) => {
-    const card = new Card (item, '.card-template', {handleCardClick: () => {
-      imagePopup.open(item.name, item.link);
-    }});
-    const cardElement = card.generateCard();
-
-    initialCardList.addItem(cardElement);
+      createCardItem(item);
     }
   },
   '.cards'
@@ -54,20 +65,8 @@ initialCardList.renderItems();
 
 //=======================================================================
 
-function createCardItem (data) {
-  const card = new Card (data, '.card-template', {handleCardClick: () => {
-    imagePopup.open(data.name, data.link);
-  }});
-  const cardElement = card.generateCard();
-
-  initialCardList.addItem(cardElement);
-
-  addCardPopup.close();
-}
-
-
-const addCardPopup = new PopupWithForm('.popup_add-card', {formSubmit: (data) => {
-  createCardItem(data);
+const addCardPopup = new PopupWithForm('.popup_add-card', {formSubmit: (item) => {
+  createCardItem(item);
   addCardPopup.close();
 }});
 
@@ -84,9 +83,9 @@ addCardButton.addEventListener('click', () => {
 editProfileButton.addEventListener('click', () => {
   editPopup.open()
 
-  const userData = userInfo.getUserInfo()
-  nameInput.value = userData.name;
-  activityInput.value = userData.activity;
+  const useritem = userInfo.getUserInfo()
+  nameInput.value = useritem.name;
+  activityInput.value = useritem.activity;
 
   formEditValidate.clearErrors();
 });

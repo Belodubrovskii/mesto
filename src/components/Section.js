@@ -1,9 +1,9 @@
 export class Section {
-  constructor ({items, renderer}, conrainerSelector) {
-    this._conrainerSelector = conrainerSelector;
+  constructor ({items, renderer}, containerSelector) {
+    this._containerSelector = containerSelector;
     this._renderedItems = items;
     this._renderer = renderer;
-    this._container = document.querySelector(this._conrainerSelector);
+    this._container = document.querySelector(this._containerSelector);
   }
 
   addItem (item) {
