@@ -1,5 +1,6 @@
 @import url(./_photo/popup_photo.css);
 @import url(./__title/popup__title.css);
+@import url(./__title/_wihout-unput/popup__title_wihout-unput.css);
 @import url(./__button/popup__button.css);
 @import url(./__button/_disabled/popup__button_disabled.css);
 @import url(./__form-name/popup__form-name.css);

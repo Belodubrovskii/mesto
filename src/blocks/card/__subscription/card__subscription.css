@@ -8,4 +8,5 @@
   overflow: hidden;
   margin: 0;
   max-width: 220px;
+  align-self: center;
 }

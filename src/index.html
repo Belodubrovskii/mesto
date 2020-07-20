@@ -12,11 +12,13 @@
   </header>
   <main class="content">
     <section class="profile">
-      <div class="profile__avatar"></div>
+      <div class="profile__avatar">
+        <button class="profile__avatar-edit"></button>
+      </div>
       <div class="profile__info">
-        <h1 class="profile__name">Жак-Ив Кусто</h1>
+        <h1 class="profile__name"></h1>
         <button class="profile__edit-btn"></button>
-        <p class="profile__activity">Исследователь океана</p>
+        <p class="profile__activity"></p>
       </div>
       <button class="profile__add-btn" type="button"></button>
     </section>
@@ -86,6 +88,31 @@
       </div>
     </section>
 
+    <section class="popup popup_edit-avatar">
+      <form class="popup__form" novalidate>
+        <h4 class="popup__title">Обновить аватар</h4>
+        <input
+          class="popup__input popup__form-image-link"
+          type="url"
+          name="avatar"
+          id="link-input"
+          placeholder="Ссылка на новый аватар"
+          required
+        >
+        <span class="popup__error" id="link-input-error"></span>
+        <input class="popup__button" type="submit" value="Сохранить">
+        <button class="popup__close-button" type="button"></button>
+      </form>
+    </section>
+
+    <section class="popup popup_delete-card">
+      <form class="popup__form" novalidate>
+        <h4 class="popup__title popup__title_wihout-unput">Вы уверены?</h4>
+        <input class="popup__button" type="submit" value="Да">
+        <button class="popup__close-button" type="button"></button>
+      </form>
+    </section>
+
     <section class="cards">
     </section>
   </main>
@@ -95,7 +122,10 @@
       <img class="card__image" alt="">
       <div class="card__wrapper">
         <h3 class="card__subscription"></h3>
-        <button class="card__like"></button>
+        <div class="card__like-wrapper">
+          <button class="card__like"></button>
+          <span class="card__number-of-likes"></span>
+        </div>
         <button class="card__recycle-bin"></button>
       </div>
   </template>

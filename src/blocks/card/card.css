@@ -4,6 +4,8 @@
 @import url(./__subscription/card__subscription.css);
 @import url(./__wrapper/card__wrapper.css);
 @import url(./__recycle-bin/card__recycle-bin.css);
+@import url(./__like-wrapper/card__like-wrapper.css);
+@import url(./__number-of-likes/card__number-of-likes.css);
 
 .card {
   display: flex;
