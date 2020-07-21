@@ -1,10 +1,10 @@
 export class Card {
-  constructor (cardProp, templateSelector, {handleCardClick, handleDeletePopup, handleCardLike}) {
+  constructor (cardProp, userInfo, templateSelector, {handleCardClick, handleDeletePopup, handleCardLike}) {
     this._link = cardProp.link;
     this._name = cardProp.name;
     this._id = cardProp._id;
     this._likes = cardProp.likes;
-    this.userId = '625f0d41c3578d0228f90e62';
+    this.userId = userInfo._id;
     this._ownerId = cardProp.owner._id;
     this._templateSelector = templateSelector;
     this._handleCardClick = handleCardClick;
@@ -39,7 +39,7 @@ export class Card {
       this._handleCardLike(this._id, this.likeButton, this._numberOfLikes);
     });
 
-    if (this._ownerId == this.userId) {
+    if (this._ownerId === this.userId) {
 
       this._recycleBin.addEventListener('click', () => this._openDeletePopup(this._element, this._id));
     }
@@ -57,7 +57,6 @@ export class Card {
     this._likes.forEach(elem => {
       if (elem._id === this.userId) {
         this._isLiked = true;
-        return
       }
     })
 
@@ -70,7 +69,7 @@ export class Card {
     this._numberOfLikes = this._element.querySelector('.card__number-of-likes');
 
     //delete bin if user did't create this card
-    if (this._ownerId !== '625f0d41c3578d0228f90e62') {
+    if (this._ownerId !== this.userId) {
       this._recycleBin.remove();
     }
 
